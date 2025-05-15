@@ -1,16 +1,88 @@
-<<<<<<< HEAD
-# cross-platform-transfer
-=======
-# React + Vite
+# Cross-Platform Transfer App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web application that allows users to seamlessly transfer text, links, and images between different devices. Simply log in on any device and access your content anywhere.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- User authentication (login/register)
+- Upload and store:
+  - Text snippets
+  - Links/URLs
+  - Images
+- Access content from any device
+- Secure storage and transfer
+- Modern, responsive UI
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
->>>>>>> cee1d28 (Initial commit)
+- Frontend:
+  - React
+  - React Router
+  - Axios
+  - Vite
+- Backend:
+  - Node.js
+  - Express
+  - MongoDB
+  - JWT Authentication
+  - Multer (file uploads)
+
+## Setup
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd cross-platform-transfer
+```
+
+2. Install frontend dependencies:
+```bash
+npm install
+```
+
+3. Install backend dependencies:
+```bash
+cd backend
+npm install
+```
+
+4. Create a `.env` file in the backend directory:
+```
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+PORT=5000
+```
+
+5. Start the backend server:
+```bash
+cd backend
+npm run dev
+```
+
+6. Start the frontend development server:
+```bash
+# In the root directory
+npm run dev
+```
+
+## Usage
+
+1. Register a new account or login with existing credentials
+2. Navigate to the Upload page to add new content:
+   - Type or paste text
+   - Share links
+   - Upload images
+3. View your content on the Dashboard
+4. Access your content from any device by logging in
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+## License
+
+MIT License
