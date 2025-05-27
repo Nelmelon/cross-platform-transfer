@@ -1,49 +1,30 @@
-import { useState } from 'react'
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
-import './App.css'
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Dashboard from "./pages/Dashboard";
+import PrivateRoute from "./components/PrivateRoute";
+import ThemedContainer from "./components/ThemedContainer";
+import { useAuth } from "./contexts/AuthContext";
 
-// Components
-import Navbar from './components/Navbar'
-import Login from './components/Login'
-import Register from './components/Register'
-import Dashboard from './components/Dashboard'
-import UploadContent from './components/UploadContent'
-
-function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  return (
-    <Router>
-      <div className="app">
-        <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
-        <main className="container">
-          <Routes>
-            <Route path="/login" element={
-              !isAuthenticated ? 
-                <Login setIsAuthenticated={setIsAuthenticated} /> : 
-                <Navigate to="/dashboard" />
-            } />
-            <Route path="/register" element={
-              !isAuthenticated ? 
-                <Register setIsAuthenticated={setIsAuthenticated} /> : 
-                <Navigate to="/dashboard" />
-            } />
-            <Route path="/dashboard" element={
-              isAuthenticated ? 
-                <Dashboard /> : 
-                <Navigate to="/login" />
-            } />
-            <Route path="/upload" element={
-              isAuthenticated ? 
-                <UploadContent /> : 
-                <Navigate to="/login" />
-            } />
-            <Route path="/" element={<Navigate to={isAuthenticated ? "/dashboard" : "/login"} />} />
-          </Routes>
-        </main>
-      </div>
-    </Router>
-  )
+function RootRedirect() {
+  const { currentUser } = useAuth();
+  return <Navigate to={currentUser ? "/dashboard" : "/login"} replace />;
 }
 
-export default App
+export default function App() {
+  return (
+    <ThemedContainer>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<RootRedirect />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/dashboard"
+            element={<PrivateRoute><Dashboard /></PrivateRoute>}
+          />
+        </Routes>
+      </BrowserRouter>
+    </ThemedContainer>
+  );
+}
