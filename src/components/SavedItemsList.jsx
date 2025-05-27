@@ -43,7 +43,8 @@ export default function SavedItemsList({ texts, loading }) {
   return (
     <ul
       id="saved-list"
-      className="space-y-4 h-[calc(100vh-16rem)] overflow-y-auto border border-gray-200 dark:border-gray-600 rounded-lg p-4 pb-40 sm:pb-32 theme-transition bg-white dark:bg-gray-800 shadow-sm overscroll-contain"
+      style={{ maxHeight: 'calc(100dvh - 16rem)' }}
+      className="space-y-4 overflow-y-auto border border-gray-200 dark:border-gray-600 rounded-lg p-4 pb-40 sm:pb-32 theme-transition bg-white dark:bg-gray-800 shadow-sm overscroll-contain"
     >
       {sortedTexts.map(({ id, content, createdAt }) => (
         <li
