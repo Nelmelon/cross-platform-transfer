@@ -1,8 +1,14 @@
 import { isURL } from '../utils/helpers';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function SavedItemsList({ texts, loading }) {
   const [copiedId, setCopiedId] = useState(null);
+
+  // Sort texts by createdAt in descending order (newest first)
+  const sortedTexts = [...texts].sort((a, b) => {
+    if (!a.createdAt || !b.createdAt) return 0;
+    return b.createdAt.seconds - a.createdAt.seconds;
+  });
 
   const handleClick = async (content, id) => {
     if (isURL(content)) {
@@ -18,6 +24,14 @@ export default function SavedItemsList({ texts, loading }) {
     }
   };
 
+  // Scroll to top when texts change
+  useEffect(() => {
+    const el = document.getElementById("saved-list");
+    if (el) {
+      el.scrollTop = 0;
+    }
+  }, [texts]);
+
   if (loading) {
     return <p className="text-secondary">Loading saved items...</p>;
   }
@@ -29,9 +43,9 @@ export default function SavedItemsList({ texts, loading }) {
   return (
     <ul
       id="saved-list"
-      className="space-y-4 h-[calc(100vh-16rem)] overflow-y-auto border border-gray-200 dark:border-gray-600 rounded-lg p-4 pb-32 sm:pb-24 theme-transition bg-white dark:bg-gray-800 shadow-sm"
+      className="space-y-4 h-[calc(100vh-16rem)] overflow-y-auto border border-gray-200 dark:border-gray-600 rounded-lg p-4 pb-40 sm:pb-32 theme-transition bg-white dark:bg-gray-800 shadow-sm overscroll-contain"
     >
-      {texts.map(({ id, content, createdAt }) => (
+      {sortedTexts.map(({ id, content, createdAt }) => (
         <li
           key={id}
           onClick={() => handleClick(content, id)}
