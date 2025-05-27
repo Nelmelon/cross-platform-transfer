@@ -29,7 +29,7 @@ export default function SavedItemsList({ texts, loading }) {
   return (
     <ul
       id="saved-list"
-      className="space-y-4 h-[calc(100vh-16rem)] overflow-y-auto border border-gray-200 dark:border-gray-600 rounded-lg p-4 pb-24 theme-transition bg-white dark:bg-gray-800 shadow-sm"
+      className="space-y-4 h-[calc(100vh-16rem)] overflow-y-auto border border-gray-200 dark:border-gray-600 rounded-lg p-4 pb-32 sm:pb-24 theme-transition bg-white dark:bg-gray-800 shadow-sm"
     >
       {texts.map(({ id, content, createdAt }) => (
         <li

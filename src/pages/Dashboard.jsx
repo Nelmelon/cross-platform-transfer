@@ -69,7 +69,7 @@ export default function Dashboard() {
         </div>
 
         {/* Floating Action Buttons */}
-        <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 flex items-center space-x-4">
+        <div className="fixed bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex items-center space-x-4 bg-gray-50 dark:bg-gray-900 px-4 py-2 rounded-full shadow-lg">
           <ThemeToggle />
           <AddItemMenu onTextClick={() => setIsModalOpen(true)} />
           <button
