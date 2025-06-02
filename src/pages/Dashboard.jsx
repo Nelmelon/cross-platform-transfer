@@ -55,21 +55,40 @@ export default function Dashboard() {
     }
   };
 
+  const handleAddText = (prefilledText = "") => {
+    setText(prefilledText);
+    setIsModalOpen(true);
+  };
+
+  const handlePaste = async (text) => {
+    if (text.trim() === "") return;
+
+    try {
+      setIsSaving(true);
+      await saveText(text);
+    } catch (error) {
+      console.error("Failed to save text:", error);
+      alert(error.message || "Failed to save text. Please try again.");
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
   return (
     <div className="min-h-[100svh] bg-gray-50 dark:bg-gray-900" style={{ minHeight: '100svh' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-36" style={{ paddingBottom: 'calc(9rem + env(safe-area-inset-bottom, 0px))' }}>
-        <h1 className="text-2xl font-bold text-center text-gray-900 dark:text-white mb-8">
+        <h1 className="text-2xl font-bold text-center text-gray-900 dark:text-white mb-3">
           Cross-Platform Transfer
         </h1>
 
-        <div className="mt-8">
+        <div className="mt-3">
           <SavedItemsList texts={texts} loading={loading} />
         </div>
 
         {/* Action Bar */}
         <div className="fixed left-1/2 transform -translate-x-1/2 flex items-center space-x-4 bg-white dark:bg-gray-800 rounded-full px-4 py-2 shadow-lg z-50" style={{ bottom: 'calc(2rem + env(safe-area-inset-bottom, 0px))' }}>
           <ThemeToggle />
-          <AddItemMenu onTextClick={() => setIsModalOpen(true)} />
+          <AddItemMenu onTextClick={handleAddText} onPaste={handlePaste} />
           <button
             onClick={handleLogout}
             className="w-12 h-12 rounded-full bg-red-600 hover:bg-red-700 text-white shadow-lg flex items-center justify-center transition-transform hover:scale-105"
