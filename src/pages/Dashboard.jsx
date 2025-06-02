@@ -78,7 +78,7 @@ export default function Dashboard() {
     <div className="min-h-[100svh] bg-gray-50 dark:bg-gray-900" style={{ minHeight: '100svh' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-36" style={{ paddingBottom: 'calc(9rem + env(safe-area-inset-bottom, 0px))' }}>
         <h1 className="text-2xl font-bold text-center text-gray-900 dark:text-white mb-3">
-          Cross-Platform Transfer
+          千川
         </h1>
 
         <div className="mt-3">
